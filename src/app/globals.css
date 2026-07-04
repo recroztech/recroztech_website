@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* page surfaces */
+  --color-ink: #0e0e14;
+  --color-panel: #ffffff;
+  --color-panel-light: #f3f3f7;
+
+  /* accents — chosen to stay legible as text on white AND as fills */
+  --color-coral: #5b4cf0;   /* electric indigo — primary brand accent */
+  --color-cyan: #0ea472;    /* emerald — secondary / tags */
+  --color-cyan-2: #f43f5e;  /* rose — tertiary / highlights */
+
+  /* text */
+  --color-lavender: #14141c;      /* primary text, near-black */
+  --color-lavender-dim: #6b6b78;  /* secondary text, warm gray */
+
+  --font-display: var(--font-space-grotesk);
+  --font-body: var(--font-inter);
+  --font-mono: var(--font-jetbrains);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #fbfbfd;
+  color: #14141c;
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Soft ambient background — pastel tints on white, not a dark mesh */
+.mesh-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 50% 38% at 15% 6%, rgba(91, 76, 240, 0.10), transparent 62%),
+    radial-gradient(ellipse 45% 36% at 88% 12%, rgba(244, 63, 94, 0.09), transparent 62%),
+    radial-gradient(ellipse 55% 45% at 50% 100%, rgba(14, 164, 114, 0.08), transparent 65%),
+    #fbfbfd;
+}
+
+.mesh-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(14, 14, 20, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14, 14, 20, 0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black, transparent 75%);
+}
+
+.glass-panel {
+  background: #ffffff;
+  border: 1px solid rgba(14, 14, 20, 0.08);
+  box-shadow: 0 1px 2px rgba(14, 14, 20, 0.04);
+}
+
+.text-gradient {
+  background: linear-gradient(100deg, #5b4cf0 0%, #8a5cf6 45%, #f43f5e 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+::selection {
+  background: rgba(91, 76, 240, 0.18);
+  color: #14141c;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #fbfbfd;
+}
+::-webkit-scrollbar-thumb {
+  background: #d7d7e0;
+  border-radius: 999px;
+}
