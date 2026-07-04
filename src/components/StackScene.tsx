@@ -122,7 +122,7 @@ export default function StackScene() {
   );
 
   return (
-    <Canvas camera={{ position: [3.2, 2.2, 4.8], fov: 42 }} dpr={[1, 1.75]} gl={{ antialias: true, alpha: true }}>
+    <Canvas camera={{ position: [3.2, 2.2, 4.8], fov: 42 }} dpr={[1, 1.2]} gl={{ antialias: false, alpha: true }}>
       <ambientLight intensity={0.7} />
       <directionalLight position={[3, 4, 2]} intensity={1.8} color="#ffffff" />
       <pointLight position={[5, 4, 4]} intensity={28} color="#f43f5e" />

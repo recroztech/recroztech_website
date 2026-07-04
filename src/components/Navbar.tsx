@@ -1,71 +1,29 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useEffect, useState, type MouseEvent } from "react";
+import { useEffect, useState } from "react";
 
 const links = [
-  { href: "/#services", label: "Services", section: "services" },
-  { href: "/#work-portfolio", label: "Solutions", section: "work-portfolio" },
-  { href: "/#work", label: "Process", section: "work" },
+  { href: "/#services", label: "Services" },
+  { href: "/#work-portfolio", label: "Solutions" },
+  { href: "/#work", label: "Process" },
   { href: "/about", label: "About" },
-  { href: "/#contact", label: "Contact", section: "contact" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 export default function Navbar() {
-  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 16);
-    window.addEventListener("scroll", onScroll);
+    const onScroll = () => {
+      const isScrolled = window.scrollY > 16;
+      setScrolled((current) => (current === isScrolled ? current : isScrolled));
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  useEffect(() => {
-    if (pathname !== "/") return;
-
-    const section = window.location.hash.replace("#", "");
-    if (!section) return;
-
-    const target = document.getElementById(section);
-    if (!target) return;
-
-    const scrollToTarget = () => {
-      const top = target.getBoundingClientRect().top + window.scrollY - 96;
-      window.scrollTo({ top, behavior: "smooth" });
-    };
-
-    requestAnimationFrame(scrollToTarget);
-    window.setTimeout(scrollToTarget, 120);
-  }, [pathname]);
-
-  const handleNavClick = (href: string, section?: string) => (event: MouseEvent<HTMLAnchorElement>) => {
-    if (!section || !href.startsWith("/#")) return;
-
-    event.preventDefault();
-
-    const target = document.getElementById(section);
-    if (!target) {
-      window.location.assign(`/${section ? `#${section}` : ""}`);
-      return;
-    }
-
-    const scrollToTarget = () => {
-      const top = target.getBoundingClientRect().top + window.scrollY - 96;
-      window.scrollTo({ top, behavior: "smooth" });
-    };
-
-    window.history.pushState(null, "", `/#${section}`);
-
-    if (pathname === "/") {
-      requestAnimationFrame(scrollToTarget);
-      window.setTimeout(scrollToTarget, 120);
-      return;
-    }
-
-    window.location.assign(`/#${section}`);
-  };
 
   return (
     <header
@@ -80,11 +38,7 @@ export default function Navbar() {
         <ul className="hidden md:flex items-center gap-8 font-mono text-sm text-lavender-dim">
           {links.map((l) => (
             <li key={l.href}>
-              <Link
-                href={l.href}
-                onClick={handleNavClick(l.href, l.section)}
-                className="hover:text-cyan transition-colors"
-              >
+              <Link href={l.href} className="hover:text-cyan transition-colors">
                 {l.label}
               </Link>
             </li>
@@ -92,7 +46,6 @@ export default function Navbar() {
         </ul>
         <Link
           href="/#contact"
-          onClick={handleNavClick("/#contact", "contact")}
           className="text-sm font-semibold px-4 py-2 rounded-full bg-ink text-white hover:opacity-85 transition-opacity"
         >
           Let&apos;s talk
