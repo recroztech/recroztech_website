@@ -27,13 +27,13 @@ export default function Footer() {
           <p className="font-mono text-xs text-cyan mb-4">Contact</p>
           <ul className="space-y-3 text-sm text-lavender-dim">
             <li className="flex items-center gap-2">
-              <Mail className="w-4 h-4 text-lavender-dim/70" /> hello@recroztech.com
+              <Mail className="w-4 h-4 text-lavender-dim/70" /> recroztech@gmail.com
             </li>
             <li className="flex items-center gap-2">
-              <Phone className="w-4 h-4 text-lavender-dim/70" /> +91 98765 43210
+              <Phone className="w-4 h-4 text-lavender-dim/70" /> +91 78881 22270
             </li>
             <li className="flex items-center gap-2">
-              <MapPin className="w-4 h-4 text-lavender-dim/70" /> Bengaluru, India
+              <MapPin className="w-4 h-4 text-lavender-dim/70" /> Mumbai, India
             </li>
           </ul>
         </div>
