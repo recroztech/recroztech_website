@@ -35,7 +35,7 @@ const accentMap: Record<string, string> = {
 
 export default function Services() {
   return (
-    <section id="services" className="relative py-28">
+    <section id="services" className="relative py-16">
       <div className="max-w-6xl mx-auto px-6">
         <Reveal>
           <p className="font-mono text-sm text-cyan mb-3">{"// what we do"}</p>

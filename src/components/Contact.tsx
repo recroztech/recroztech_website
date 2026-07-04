@@ -60,7 +60,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative py-28">
+    <section id="contact" className="relative py-16">
       <div className="max-w-4xl mx-auto px-6 text-center">
         <Reveal>
           <p className="font-mono text-sm text-cyan mb-3">{"// start here"}</p>

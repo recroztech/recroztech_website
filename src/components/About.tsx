@@ -8,7 +8,7 @@ const stats = [
 
 export default function About() {
   return (
-    <section id="about" className="relative py-28">
+    <section id="about" className="relative py-16">
       <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-start">
         <Reveal>
           <p className="font-mono text-sm text-cyan mb-3">{"// why Recroz Tech"}</p>

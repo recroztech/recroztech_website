@@ -1,45 +1,100 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, type MouseEvent } from "react";
 import { Mail, MapPin, Phone } from "lucide-react";
 
 export default function Footer() {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (pathname !== "/") return;
+
+    const section = window.location.hash.replace("#", "");
+    if (!section) return;
+
+    const target = document.getElementById(section);
+    if (!target) return;
+
+    const scrollToTarget = () => {
+      const top = target.getBoundingClientRect().top + window.scrollY - 96;
+      window.scrollTo({ top, behavior: "smooth" });
+    };
+
+    requestAnimationFrame(scrollToTarget);
+    window.setTimeout(scrollToTarget, 120);
+  }, [pathname]);
+
+  const handleSectionClick = (section: string) => (event: MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+
+    const target = document.getElementById(section);
+    if (!target) {
+      window.location.assign(`/#${section}`);
+      return;
+    }
+
+    const scrollToTarget = () => {
+      const top = target.getBoundingClientRect().top + window.scrollY - 96;
+      window.scrollTo({ top, behavior: "smooth" });
+    };
+
+    window.history.pushState(null, "", `/#${section}`);
+
+    if (pathname === "/") {
+      requestAnimationFrame(scrollToTarget);
+      window.setTimeout(scrollToTarget, 120);
+      return;
+    }
+
+    window.location.assign(`/#${section}`);
+  };
+
   return (
-    <footer className="relative border-t border-ink/8 mt-10">
-      <div className="absolute inset-0 bg-linear-to-b from-transparent to-panel/60 pointer-events-none" />
+    <footer className="relative mt-10 border-t border-white/10 bg-ink text-white">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.16),transparent_45%)] pointer-events-none" />
       <div className="relative max-w-6xl mx-auto px-6 py-16 grid md:grid-cols-3 gap-10">
         <div>
           <p className="font-display font-semibold text-lg">
             Recroz<span className="text-coral"> Tech</span>
           </p>
-          <p className="text-lavender-dim text-sm mt-4 leading-relaxed">
+          <p className="text-white/70 text-sm mt-4 leading-relaxed">
             Reliable IT services and custom software solutions for modern businesses that want to grow with confidence.
           </p>
         </div>
 
         <div>
           <p className="font-mono text-xs text-cyan mb-4">Services</p>
-          <ul className="space-y-2 text-sm text-lavender-dim">
-            <li>Custom software development</li>
-            <li>Web &amp; mobile applications</li>
-            <li>Cloud &amp; DevOps support</li>
+          <ul className="space-y-2 text-sm text-white/70">
+            <li><Link href="/#services" onClick={handleSectionClick("services")} className="hover:text-cyan transition-colors">Custom software development</Link></li>
+            <li><Link href="/#services" onClick={handleSectionClick("services")} className="hover:text-cyan transition-colors">Web &amp; mobile applications</Link></li>
+            <li><Link href="/#services" onClick={handleSectionClick("services")} className="hover:text-cyan transition-colors">Cloud &amp; DevOps support</Link></li>
           </ul>
         </div>
 
         <div>
           <p className="font-mono text-xs text-cyan mb-4">Contact</p>
-          <ul className="space-y-3 text-sm text-lavender-dim">
+          <ul className="space-y-3 text-sm text-white/70">
             <li className="flex items-center gap-2">
-              <Mail className="w-4 h-4 text-lavender-dim/70" /> recroztech@gmail.com
+              <Mail className="w-4 h-4 text-cyan" /> recroztech@gmail.com
             </li>
             <li className="flex items-center gap-2">
-              <Phone className="w-4 h-4 text-lavender-dim/70" /> +91 78881 22270
+              <Phone className="w-4 h-4 text-cyan" /> +91 78881 22270
             </li>
             <li className="flex items-center gap-2">
-              <MapPin className="w-4 h-4 text-lavender-dim/70" /> Mumbai, India
+              <MapPin className="w-4 h-4 text-cyan" /> Mumbai, India
             </li>
           </ul>
         </div>
       </div>
 
-      <div className="relative border-t border-ink/8 py-6 text-center text-xs text-lavender-dim/60 font-mono">
+      <div className="relative border-t border-white/10 py-6 px-6 text-center text-xs text-white/60 font-mono">
+        <div className="flex flex-wrap items-center justify-center gap-4 mb-3">
+          <Link href="/about" className="hover:text-cyan transition-colors">About</Link>
+          <Link href="/privacy-policy" className="hover:text-cyan transition-colors">Privacy Policy</Link>
+          <Link href="/terms-and-conditions" className="hover:text-cyan transition-colors">Terms & Conditions</Link>
+        </div>
         © {new Date().getFullYear()} Recroz Tech. All rights reserved.
       </div>
     </footer>

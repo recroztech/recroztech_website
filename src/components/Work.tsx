@@ -56,7 +56,7 @@ export default function Work() {
   const [active, setActive] = useState<number | null>(null);
 
   return (
-    <section id="work-portfolio" className="relative py-28">
+    <section id="work-portfolio" className="relative py-16">
       <div className="max-w-6xl mx-auto px-6">
         <Reveal>
           <p className="font-mono text-sm text-coral mb-3">{"// solutions"}</p>

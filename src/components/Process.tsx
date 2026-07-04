@@ -20,7 +20,7 @@ const steps = [
 
 export default function Process() {
   return (
-    <section id="work" className="relative py-28">
+    <section id="work" className="relative py-16">
       <div className="max-w-6xl mx-auto px-6">
         <Reveal>
           <p className="font-mono text-sm text-cyan mb-3">{"// how we work"}</p>
